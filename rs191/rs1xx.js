@@ -4,12 +4,11 @@ function on_join(packet, deveui) {
 }
 function on_uplink(packet, payload, deveui) {
   var up_message = {};
-  let signed_payload = new Int8Array(payload);
   // temp and rh data notification
   if (payload[0] == 0x01) {
-    up_message.options = payload[1];
+    up_message.options = 44;
     up_message.humidity = payload[2] / 100.0 + payload[3];
-    up_message.temp = signed_payload[4] / 100.0 + signed_payload[5];
+    up_message.temp = payload[4] / 100.0 + payload[5];
     up_message.battery = batteryTable[payload[6]];
     up_message.alarms = (payload[7] << 8) | payload[8];
     up_message.backlog = (payload[9] << 8) | payload[10];
