@@ -12,7 +12,7 @@ function on_uplink(packet, payload, deveui) {
     up_message.options = payload[1];
     up_message.humidity = payload[2] / 100.0 + payload[3];
     up_message.temp = payload[4] / 100.0 + payload[5];
-    up_message.temp = signed_payload[4] / 100.0 + signed_payload[5];
+    up_message.signed_temp = signed_payload[4] / 100.0 + signed_payload[5];
     up_message.battery = batteryTable[payload[6]];
     up_message.alarms = (payload[7] << 8) | payload[8];
     up_message.backlog = (payload[9] << 8) | payload[10];
